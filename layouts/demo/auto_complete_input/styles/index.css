@@ -1,0 +1,107 @@
+:host {
+  display: inline-block;
+  position: relative;
+}
+
+:host,
+:host * {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  marging: 0;
+  border: none;
+}
+
+input,
+button,
+ul {
+  font-size: 1em;
+  font-family: Helvetica;
+}
+
+input,
+button {
+  text-transform: capitalize;
+}
+
+input,
+ul {
+  border-radius: 0.25em;
+  border: solid 1px #ccc;
+  outline: none;
+
+  &:focus {
+    border-color: rgb(var(--sky));
+  }
+}
+
+input,
+li > button {
+  padding: 0.33em;
+}
+
+input {
+  width: 100%;
+
+  &:has(~ button) {
+    padding-right: calc(var(--add-btn-width) + 0.33em);
+  }
+}
+
+.add {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  right: 0.25em;
+  height: 1.5em;
+  padding-inline: 0.25em;
+  min-width: 1.5em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(var(--sky));
+  border: none;
+  color: white;
+  border-radius: 0.175em;
+  cursor: pointer;
+}
+
+ul {
+  position: absolute;
+  appearance: none;
+  top: 100%;
+  margin-top: 0.25em;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  flex-direction: column;
+  min-width: 100%;
+  list-style: none;
+  color: black;
+  background-color: white;
+  padding: 0;
+  overflow: hidden;
+
+  li > button {
+    cursor: pointer;
+    background-color: transparent;
+    text-align: left;
+    width: 100%;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+
+    &:hover,
+    &:focus {
+      outline: 0;
+      background-color: rgba(var(--sky), 50%);
+    }
+  }
+}
+
+:is(input:focus ~ ul, ul:focus, ul:focus-within):not(:has([aria-selected])) {
+  opacity: 1;
+  pointer-events: revert;
+}

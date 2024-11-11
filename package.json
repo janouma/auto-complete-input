@@ -1,0 +1,14 @@
+{
+  "name": "@orme/auto-complete-input",
+  "version": "0.5.0",
+  "description": "self explanatory package name",
+  "main": "src/components/auto_complete_input/index.svelte",
+  "scripts": {
+    "start": "npx http-server --silent -p 3000 -c1"
+  },
+  "author": "janouma",
+  "license": "ISC",
+  "dependencies": {
+    "svelte": "^4.2.19"
+  }
+}

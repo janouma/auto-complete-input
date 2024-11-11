@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" class="development">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, user-scalable = no, maximum-scale=1.0, viewport-fit=cover">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../index.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "svelte/internal": "/node_modules/svelte/src/runtime/internal/index.js",
+          "svelte/internal/disclose-version": "/node_modules/svelte/src/runtime/internal/disclose-version/index.js"
+        }
+      }
+    </script>
+    <script type="module" src="../../../../../layouts/demo/auto_complete_input/index.js"></script>
+    <script type="module">
+      import { applyParameters } from '../../../../helpers/parameters.js'
+
+      const dialog = document.querySelector('dialog')
+
+      dialog.querySelector('button').addEventListener('click', () => {
+        const content = dialog.querySelector('p')
+        dialog.removeChild(content)
+        dialog.close()
+      })
+
+      const component = document.createElement('auto-complete-input')
+      let options
+
+      applyParameters(
+        component,
+        {
+          placeholder: 'enter value',
+          threshold: 250,
+          addlabel: 'add it',
+          accessibleaddlabel: 'add value',
+          // stylesheet: './styles/alternate.css', //
+
+          oninput (text) {
+            component.options = text.match(/full/i)
+              ? [
+                { value: text + 'a', label: text + ' a' },
+                text + ' b',
+                text + ' C',
+                text + ' d',
+                text + ' E'
+              ]
+            : []
+          },
+
+          onadd (text) {
+            const content = document.createElement('p')
+            content.textContent = 'adding: ' + text
+            dialog.prepend(content)
+            dialog.showModal()
+          }
+        }
+      )
+
+      document.body.appendChild(component)
+    </script>
+
+    <style>
+      body {
+        background-color: rgb(var(--eggshell));
+        padding: 1em;
+      }
+
+      p {
+        color: black;
+      }
+
+      auto-complete-input {
+        width: 10em;
+      }
+
+      dialog {
+        border: 1px solid #ccc;
+        box-shadow: 0.25em 0.25em 0.25em #555;
+        border-radius: 0.25em;
+        font-family: Helvetica;
+        min-width: 16em;
+        text-align: center;
+
+        button {
+          background-color: rgb(var(--sky));
+          display: block;
+          padding-inline: 2em;
+          margin-inline: auto;
+          outline: none;
+          border-radius: 0.25em;
+          border: none;
+          color: white;
+        }
+
+        &::backdrop {
+          background-color: rgba(0,0,0,33%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Écrire un texte contenant "full" pour avoir la complétion</strong>
+    </p>
+    <dialog>
+      <button>Close</button>
+    </dialog>
+  </body>
+</html>

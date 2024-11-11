@@ -1,0 +1,33 @@
+@import "index.css";
+
+:host {
+  font-size: 1.75em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.add {
+  position: revert;
+  translate: 0 0;
+  height: 1.875em;
+  background-color: rgb(var(--grass));
+  border: solid 1px #ccc;
+  border-left-width: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  flex: none;
+
+  *:focus ~ & {
+    border-color: rgb(var(--sky));
+  }
+}
+
+input {
+  flex: 1 1 0;
+
+  &:has(~ button) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-right: 0.33em;
+  }
+}
