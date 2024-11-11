@@ -36,6 +36,14 @@
           accessibleaddlabel: 'add value',
           // stylesheet: './styles/alternate.css', //
 
+          options: [
+            { value: 'text-a', label: 'text a' },
+            'text b',
+            'text C',
+            'text d',
+            'text E'
+          ],
+
           oninput (text) {
             component.options = text.match(/full/i)
               ? [
